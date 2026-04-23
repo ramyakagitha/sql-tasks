@@ -1,0 +1,62 @@
+MySQL Shell 8.0.45
+
+Copyright (c) 2016, 2026, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \c root@localhost
+Creating a session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 28 (X protocol)
+Server version: 8.0.45 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:33060+ ssl  SQL > create database constraints;
+Query OK, 1 row affected (0.0197 sec)
+ MySQL  localhost:33060+ ssl  SQL > use constraints;
+Default schema set to `constraints`.
+Fetching global names, object names from `constraints` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  constraints  SQL > create table user(id int unique,phone varchar(15) unique);
+Query OK, 0 rows affected (0.1369 sec)
+ MySQL  localhost:33060+ ssl  constraints  SQL > alter table user add constraint uq_phone unique(phone);
+Query OK, 0 rows affected, 1 warning (0.0877 sec)
+
+Records: 0  Duplicates: 0  Warnings: 1
+Warning (code 1831): Duplicate index 'uq_phone' defined on the table 'constraints.user'. This is deprecated and will be disallowed in a future release.
+ MySQL  localhost:33060+ ssl  constraints  SQL > desc user;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  | UNI | NULL    |       |
+| phone | varchar(15) | YES  | UNI | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.0130 sec)
+ MySQL  localhost:33060+ ssl  constraints  SQL > create table students(name varchar(30) not null,roll_no int not null,address varchar(50));
+Query OK, 0 rows affected (0.0499 sec)
+ MySQL  localhost:33060+ ssl  constraints  SQL > alter table students modify address varchar(50) not null;
+Query OK, 0 rows affected (0.1363 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  constraints  SQL > create table books(book_id int primary key,title varchar(50),author varchar(50));
+Query OK, 0 rows affected (0.0543 sec)
+ MySQL  localhost:33060+ ssl  constraints  SQL > alter table books add primary key(book_id);
+ERROR: 1068: Multiple primary key defined
+ MySQL  localhost:33060+ ssl  constraints  SQL > alter table books add constraint pk_bid primary key(book_id);
+ERROR: 1068: Multiple primary key defined
+ MySQL  localhost:33060+ ssl  constraints  SQL > alter table books drop primary key;
+Query OK, 0 rows affected (0.1140 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  constraints  SQL > alter table books add constraint pk_bid primary key(book_id);
+Query OK, 0 rows affected (0.0898 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  constraints  SQL > create table employees(emp_id int primary key,name varchar(50) not null,age int check(age>=18));
+Query OK, 0 rows affected (0.0500 sec)
+ MySQL  localhost:33060+ ssl  constraints  SQL > alter table employees add constraint chk_age check(age>=18);
+Query OK, 0 rows affected (0.1156 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  constraints  SQL >
