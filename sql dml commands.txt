@@ -1,0 +1,166 @@
+ MySQL  localhost:33060+ ssl  library_db  SQL > create database hospital;
+Query OK, 1 row affected (0.0617 sec)
+ MySQL  localhost:33060+ ssl  library_db  SQL > use hospital;
+Default schema set to `hospital`.
+Fetching global names, object names from `hospital` for auto-completion... Press ^C to stop.
+ 
+ MySQL  localhost:33060+ ssl  hospital  SQL > create table appointments(id int,patient_name varchar(50),appointment_date date,aappointment_time time);
+Query OK, 0 rows affected (0.0484 sec)
+ 
+ MySQL  localhost:33060+ ssl  hospital  SQL > create table orders(order_id int,item varchar(50),ordered_at datetime,shipped_at timestamp);
+Query OK, 0 rows affected (0.0464 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > create table students(id int,name varchar(50),age int,city varchar(50));
+Query OK, 0 rows affected (0.0477 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > insert into students(id,name,age,city)values(1,"ramya",21,"bhimavaram");
+Query OK, 1 row affected (0.0159 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > select * from students;
++----+-------+-----+------------+
+| id | name  | age | city       |
++----+-------+-----+------------+
+|  1 | ramya |  21 | bhimavaram |
++----+-------+-----+------------+
+1 row in set (0.0090 sec)
+ 1
+ MySQL  localhost:33060+ ssl  hospital  SQL > create table employees(emp_id int,name varchar(50),role varchar(50),salary decimal(8,2));
+Query OK, 0 rows affected (0.0456 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > insert into employees values(1,"vasanthi","marketing",500000);
+Query OK, 1 row affected (0.0168 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > select * from employees;
++--------+----------+-----------+-----------+
+| emp_id | name     | role      | salary    |
++--------+----------+-----------+-----------+
+|      1 | vasanthi | marketing | 500000.00 |
++--------+----------+-----------+-----------+
+1 row in set (0.0019 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > create table products(product_id int,product_name varchar(50),price float);
+Query OK, 0 rows affected (0.0534 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > insert into products(product_id,product_name,price) values (1,"laptop",55000),(2,"mobile",20000),(3,"headphones",1500);
+Query OK, 3 rows affected (0.0206 sec)
+
+Records: 3  Duplicates: 0  Warnings: 0
+ 
+ MySQL  localhost:33060+ ssl  hospital  SQL > insert into appointments(id,patient_name,appointment_date,aappointment_time)values(1,"navya",'2025-04-20','20:45:33');
+Query OK, 1 row affected (0.0146 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > insert into orders(order_id,item,ordered_at,shipped_at)values
+                                           -> (1,"mouse",'2026-04-15 12:29:56','2026-04-21 10:55:12'),
+                                           -> (2,"earpods",'2026-03-19 22:18:33','2026-03-30 14:37:03');
+Query OK, 2 rows affected (0.0489 sec)
+
+Records: 2  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  hospital  SQL > insert into students(id,name,age,city)values(2,"vasanthi",23,"guntur"),(3,"pranathi",20,"vijayawada");
+Query OK, 2 rows affected (0.0132 sec)
+
+Records: 2  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  hospital  SQL > update students set city="bangalore" where id=2;
+Query OK, 1 row affected (0.0142 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  hospital  SQL > select * from students;
++----+----------+-----+------------+
+| id | name     | age | city       |
++----+----------+-----+------------+
+|  1 | ramya    |  21 | bhimavaram |
+|  2 | vasanthi |  23 | bangalore  |
+|  3 | pranathi |  20 | vijayawada |
++----+----------+-----+------------+
+3 rows in set (0.0016 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > desc employees;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| emp_id | int          | YES  |     | NULL    |       |
+| name   | varchar(50)  | YES  |     | NULL    |       |
+| role   | varchar(50)  | YES  |     | NULL    |       |
+| salary | decimal(8,2) | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+4 rows in set (0.0052 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > insert into employees(emp_id,name,role,salary)values
+                                           -> (2,"ramya","hr",250000),
+                                           -> (3,"pranathi","manager",75000);
+Query OK, 2 rows affected (0.0128 sec)
+
+Records: 2  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  hospital  SQL > update employees set salary=salary+5000 where role="hr";
+Query OK, 1 row affected (0.0136 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  hospital  SQL > select * from employees;
++--------+----------+-----------+-----------+
+| emp_id | name     | role      | salary    |
++--------+----------+-----------+-----------+
+|      1 | vasanthi | marketing | 500000.00 |
+|      2 | ramya    | hr        | 255000.00 |
+|      3 | pranathi | manager   |  75000.00 |
++--------+----------+-----------+-----------+
+3 rows in set (0.0083 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > desc products;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| product_id   | int         | YES  |     | NULL    |       |
+| product_name | varchar(50) | YES  |     | NULL    |       |
+| price        | float       | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.0050 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > select * from products;
++------------+--------------+-------+
+| product_id | product_name | price |
++------------+--------------+-------+
+|          1 | laptop       | 55000 |
+|          2 | mobile       | 20000 |
+|          3 | headphones   |  1500 |
++------------+--------------+-------+
+3 rows in set (0.0017 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > update products set price=0;
+Query OK, 3 rows affected (0.0138 sec)
+
+Rows matched: 3  Changed: 3  Warnings: 0
+ MySQL  localhost:33060+ ssl  hospital  SQL > select * from products;
++------------+--------------+-------+
+| product_id | product_name | price |
++------------+--------------+-------+
+|          1 | laptop       |     0 |
+|          2 | mobile       |     0 |
+|          3 | headphones   |     0 |
++------------+--------------+-------+
+3 rows in set (0.0018 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > desc appointments;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| id                | int         | YES  |     | NULL    |       |
+| patient_name      | varchar(50) | YES  |     | NULL    |       |
+| appointment_date  | date        | YES  |     | NULL    |       |
+| aappointment_time | time        | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.0049 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > update appointments set appointment_date='2025-07-20' where id=1;
+Query OK, 1 row affected (0.0147 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  hospital  SQL > select * from appointments;
++----+--------------+------------------+-------------------+
+| id | patient_name | appointment_date | aappointment_time |
++----+--------------+------------------+-------------------+
+|  1 | navya        | 2025-07-20       | 20:45:33          |
++----+--------------+------------------+-------------------+
+1 row in set (0.0018 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > select * from students;
++----+----------+-----+------------+
+| id | name     | age | city       |
++----+----------+-----+------------+
+|  1 | ramya    |  21 | bhimavaram |
+|  2 | vasanthi |  23 | bangalore  |
+|  3 | pranathi |  20 | vijayawada |
++----+----------+-----+------------+
+3 rows in set (0.0017 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > delete from students where id=3;
+Query OK, 1 row affected (0.0135 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > delete from employees where role="manager";
+Query OK, 1 row affected (0.0149 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > delete from products;
+Query OK, 3 rows affected (0.0146 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > delete from appointments where appointment_date<'2024-06-01';
+Query OK, 0 rows affected (0.0017 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > delete from orders where shipped_at=null;
+Query OK, 0 rows affected (0.0015 sec)
