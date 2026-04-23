@@ -1,0 +1,197 @@
+ MySQL  localhost:33060+ ssl  hospital  SQL > create database tasks;
+Query OK, 1 row affected (0.0112 sec)
+ MySQL  localhost:33060+ ssl  hospital  SQL > use tasks;
+Default schema set to `tasks`.
+Fetching global names, object names from `tasks` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  tasks  SQL > create table products(product_id int,product_name varchar(50),price decimal(9,2),discount float,stock_quantity int);
+Query OK, 0 rows affected (0.0546 sec)
+ MySQL  localhost:33060+ ssl  tasks  SQL > create table employees(emp_id int,name varchar(50),monthly_salary decimal(9,2),bonus_percent float);
+Query OK, 0 rows affected (0.0456 sec)
+ MySQL  localhost:33060+ ssl  tasks  SQL > insert into products(product_id,product_name,price,discount,stock_quantity)values
+                                        -> (1,'laptop',50000,10,5),
+                                        -> (2,'mobile',20000,5,10),
+                                        -> (3,'tablet',15000,8,7),
+                                        -> (4,'headphones',2000,15,20),
+                                        -> (5,'keyboard',1500,10,15),
+                                        -> (6,'mouse',800,5,25),
+                                        -> (7,'monitor',12000,12,8),
+                                        -> (8,'printer',7000,10,6),
+                                        -> (9,'speaker',3000,7,12),
+                                        -> (10,'webcam',2500,9,9);
+Query OK, 10 rows affected (0.0162 sec)
+
+Records: 10  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  tasks  SQL > insert into employees(emp_id,name,monthly_salary,bonus_percent)values
+                                        -> (101,'ravi',30000,10),
+                                        -> (102,'sita',35000,12),
+                                        -> (103,'arjun',40000,8),
+                                        -> (104,'priya',28000,15),
+                                        -> (105,'kiran',32000,10),
+                                        -> (106,'meena',36000,9),
+                                        -> (107,'rahul',45000,7),
+                                        -> (108,'anjali',38000,11),
+                                        -> (109,'vikram',42000,6),
+                                        -> (110,'divya',31000,13);
+Query OK, 10 rows affected (0.0163 sec)
+
+Records: 10  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  tasks  SQL > select product_id,product_name,price,discount,stock_quantity,(price*stock_quantity) as total_values from products;
++------------+--------------+----------+----------+----------------+--------------+
+| product_id | product_name | price    | discount | stock_quantity | total_values |
++------------+--------------+----------+----------+----------------+--------------+
+|          1 | laptop       | 50000.00 |       10 |              5 |    250000.00 |
+|          2 | mobile       | 20000.00 |        5 |             10 |    200000.00 |
+|          3 | tablet       | 15000.00 |        8 |              7 |    105000.00 |
+|          4 | headphones   |  2000.00 |       15 |             20 |     40000.00 |
+|          5 | keyboard     |  1500.00 |       10 |             15 |     22500.00 |
+|          6 | mouse        |   800.00 |        5 |             25 |     20000.00 |
+|          7 | monitor      | 12000.00 |       12 |              8 |     96000.00 |
+|          8 | printer      |  7000.00 |       10 |              6 |     42000.00 |
+|          9 | speaker      |  3000.00 |        7 |             12 |     36000.00 |
+|         10 | webcam       |  2500.00 |        9 |              9 |     22500.00 |
++------------+--------------+----------+----------+----------------+--------------+
+10 rows in set (0.0039 sec)
+ MySQL  localhost:33060+ ssl  tasks  SQL > select product_name,(price-5) as salr_price from products;
++--------------+------------+
+| product_name | salr_price |
++--------------+------------+
+| laptop       |   49995.00 |
+| mobile       |   19995.00 |
+| tablet       |   14995.00 |
+| headphones   |    1995.00 |
+| keyboard     |    1495.00 |
+| mouse        |     795.00 |
+| monitor      |   11995.00 |
+| printer      |    6995.00 |
+| speaker      |    2995.00 |
+| webcam       |    2495.00 |
++--------------+------------+
+10 rows in set (0.0017 sec)
+ MySQL  localhost:33060+ ssl  tasks  SQL > select product_name,(price*1.10) as new_price from products;
++--------------+------------+
+| product_name | new_price  |
++--------------+------------+
+| laptop       | 55000.0000 |
+| mobile       | 22000.0000 |
+| tablet       | 16500.0000 |
+| headphones   |  2200.0000 |
+| keyboard     |  1650.0000 |
+| mouse        |   880.0000 |
+| monitor      | 13200.0000 |
+| printer      |  7700.0000 |
+| speaker      |  3300.0000 |
+| webcam       |  2750.0000 |
++--------------+------------+
+10 rows in set (0.0017 sec)
+ MySQL  localhost:33060+ ssl  tasks  SQL > select emp_id,name,(monthly_salary*12) as annual_sal from employees;
++--------+--------+------------+
+| emp_id | name   | annual_sal |
++--------+--------+------------+
+|    101 | ravi   |  360000.00 |
+|    102 | sita   |  420000.00 |
+|    103 | arjun  |  480000.00 |
+|    104 | priya  |  336000.00 |
+|    105 | kiran  |  384000.00 |
+|    106 | meena  |  432000.00 |
+|    107 | rahul  |  540000.00 |
+|    108 | anjali |  456000.00 |
+|    109 | vikram |  504000.00 |
+|    110 | divya  |  372000.00 |
++--------+--------+------------+
+10 rows in set (0.0092 sec)
+  MySQL  localhost:33060+ ssl  tasks  SQL > select emp_id,name,(monthly_salary*(bonus_percent/100)) as emp_bonus from employees;
++--------+--------+--------------------+
+| emp_id | name   | emp_bonus          |
++--------+--------+--------------------+
+|    101 | ravi   |               3000 |
+|    102 | sita   |               4200 |
+|    103 | arjun  |               3200 |
+|    104 | priya  |               4200 |
+|    105 | kiran  |               3200 |
+|    106 | meena  |               3240 |
+|    107 | rahul  | 3150.0000000000005 |
+|    108 | anjali |               4180 |
+|    109 | vikram |               2520 |
+|    110 | divya  |               4030 |
++--------+--------+--------------------+
+10 rows in set (0.0117 sec)
+ MySQL  localhost:33060+ ssl  tasks  SQL > select product_id,(product_id % 2) as remainder from products;
++------------+-----------+
+| product_id | remainder |
++------------+-----------+
+|          1 |         1 |
+|          2 |         0 |
+|          3 |         1 |
+|          4 |         0 |
+|          5 |         1 |
+|          6 |         0 |
+|          7 |         1 |
+|          8 |         0 |
+|          9 |         1 |
+|         10 |         0 |
++------------+-----------+
+10 rows in set (0.0015 sec)
+ MySQL  localhost:33060+ ssl  tasks  SQL > select product_id,(stock_quantity/4) as items_per_location from products;
++------------+--------------------+
+| product_id | items_per_location |
++------------+--------------------+
+|          1 |             1.2500 |
+|          2 |             2.5000 |
+|          3 |             1.7500 |
+|          4 |             5.0000 |
+|          5 |             3.7500 |
+|          6 |             6.2500 |
+|          7 |             2.0000 |
+|          8 |             1.5000 |
+|          9 |             3.0000 |
+|         10 |             2.2500 |
++------------+--------------------+
+10 rows in set (0.0018 sec)
+ MySQL  localhost:33060+ ssl  tasks  SQL > select product_id,(price-2) as profit_per_unit from products;
++------------+-----------------+
+| product_id | profit_per_unit |
++------------+-----------------+
+|          1 |        49998.00 |
+|          2 |        19998.00 |
+|          3 |        14998.00 |
+|          4 |         1998.00 |
+|          5 |         1498.00 |
+|          6 |          798.00 |
+|          7 |        11998.00 |
+|          8 |         6998.00 |
+|          9 |         2998.00 |
+|         10 |         2498.00 |
++------------+-----------------+
+10 rows in set (0.0032 sec)
+ MySQL  localhost:33060+ ssl  tasks  SQL > select emp_id,name,monthly_salary,(monthly_salary+200) as sal_travel from employees;
++--------+--------+----------------+------------+
+| emp_id | name   | monthly_salary | sal_travel |
++--------+--------+----------------+------------+
+|    101 | ravi   |       30000.00 |   30200.00 |
+|    102 | sita   |       35000.00 |   35200.00 |
+|    103 | arjun  |       40000.00 |   40200.00 |
+|    104 | priya  |       28000.00 |   28200.00 |
+|    105 | kiran  |       32000.00 |   32200.00 |
+|    106 | meena  |       36000.00 |   36200.00 |
+|    107 | rahul  |       45000.00 |   45200.00 |
+|    108 | anjali |       38000.00 |   38200.00 |
+|    109 | vikram |       42000.00 |   42200.00 |
+|    110 | divya  |       31000.00 |   31200.00 |
++--------+--------+----------------+------------+
+10 rows in set (0.0020 sec)
+ MySQL  localhost:33060+ ssl  tasks  SQL > select product_id,product_name,price,((price*50)-100) as price_after_discount from products;
++------------+--------------+----------+----------------------+
+| product_id | product_name | price    | price_after_discount |
++------------+--------------+----------+----------------------+
+|          1 | laptop       | 50000.00 |           2499900.00 |
+|          2 | mobile       | 20000.00 |            999900.00 |
+|          3 | tablet       | 15000.00 |            749900.00 |
+|          4 | headphones   |  2000.00 |             99900.00 |
+|          5 | keyboard     |  1500.00 |             74900.00 |
+|          6 | mouse        |   800.00 |             39900.00 |
+|          7 | monitor      | 12000.00 |            599900.00 |
+|          8 | printer      |  7000.00 |            349900.00 |
+|          9 | speaker      |  3000.00 |            149900.00 |
+|         10 | webcam       |  2500.00 |            124900.00 |
++------------+--------------+----------+----------------------+
+10 rows in set (0.0019 sec)
