@@ -1,0 +1,239 @@
+ MySQL  localhost:33060+ ssl  tasks  SQL > create database operators;
+Query OK, 1 row affected (0.1658 sec)
+ MySQL  localhost:33060+ ssl  tasks  SQL > use operators;
+Default schema set to `operators`.
+Fetching global names, object names from `operators` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  operators  SQL > create table products(product_name varchar(50),price decimal(8,2),stock_quantity int);
+Query OK, 0 rows affected (0.1240 sec)
+
+ MySQL  localhost:33060+ ssl  operators  SQL > insert into products(product_name,price,stock_quantity)values
+                                            -> ('Pen',50,100),
+                                            -> ('Notebook',200,45),
+                                            -> ('Bag',1500,5),
+                                            -> ('Laptop',50000,10),
+                                            -> ('Mouse',500,8),
+                                            -> ('Keyboard',500,60),
+                                            -> ('Bottle',250,70),
+                                            -> ('Pencil',20,200),
+                                            -> ('Charger',1200,15),
+                                            -> ('Desk Lamp',500,3);
+Query OK, 10 rows affected (0.0319 sec)
+
+Records: 10  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from products where price=500;
++--------------+--------+----------------+
+| product_name | price  | stock_quantity |
++--------------+--------+----------------+
+| Mouse        | 500.00 |              8 |
+| Keyboard     | 500.00 |             60 |
+| Desk Lamp    | 500.00 |              3 |
++--------------+--------+----------------+
+3 rows in set (0.0116 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from products where stock_quantity<10;
++--------------+---------+----------------+
+| product_name | price   | stock_quantity |
++--------------+---------+----------------+
+| Bag          | 1500.00 |              5 |
+| Mouse        |  500.00 |              8 |
+| Desk Lamp    |  500.00 |              3 |
++--------------+---------+----------------+
+3 rows in set (0.0018 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from products where price>1000;
++--------------+----------+----------------+
+| product_name | price    | stock_quantity |
++--------------+----------+----------------+
+| Bag          |  1500.00 |              5 |
+| Laptop       | 50000.00 |             10 |
+| Charger      |  1200.00 |             15 |
++--------------+----------+----------------+
+3 rows in set (0.0017 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from products where price<=250;
++--------------+--------+----------------+
+| product_name | price  | stock_quantity |
++--------------+--------+----------------+
+| Pen          |  50.00 |            100 |
+| Notebook     | 200.00 |             45 |
+| Bottle       | 250.00 |             70 |
+| Pencil       |  20.00 |            200 |
++--------------+--------+----------------+
+4 rows in set (0.0017 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from products where stock_quantity>=50;
++--------------+--------+----------------+
+| product_name | price  | stock_quantity |
++--------------+--------+----------------+
+| Pen          |  50.00 |            100 |
+| Keyboard     | 500.00 |             60 |
+| Bottle       | 250.00 |             70 |
+| Pencil       |  20.00 |            200 |
++--------------+--------+----------------+
+4 rows in set (0.0016 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from products where not product_name='Pen';
++--------------+----------+----------------+
+| product_name | price    | stock_quantity |
++--------------+----------+----------------+
+| Notebook     |   200.00 |             45 |
+| Bag          |  1500.00 |              5 |
+| Laptop       | 50000.00 |             10 |
+| Mouse        |   500.00 |              8 |
+| Keyboard     |   500.00 |             60 |
+| Bottle       |   250.00 |             70 |
+| Pencil       |    20.00 |            200 |
+| Charger      |  1200.00 |             15 |
+| Desk Lamp    |   500.00 |              3 |
++--------------+----------+----------------+
+9 rows in set (0.0090 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > create table employees(name varchar(50),salary decimal(8,2),department varchar(30),city varchar(50));
+Query OK, 0 rows affected (0.0539 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > insert into employees(name,salary,department,city)values
+                                            -> ('Ravi',45000,'Sales','Hyderabad'),
+                                            -> ('Sneha',30000,'HR','Mumbai'),
+                                            -> ('Arjun',70000,'IT','Bangalore'),
+                                            -> ('Priya',65000,'Sales','Chennai'),
+                                            -> ('Kiran',50000,'Finance','Hyderabad'),
+                                            -> ('Meena',25000,'Finance','Delhi'),
+                                            -> ('Rahul',80000,'IT','Pune'),
+                                            -> ('Anjali',42000,'Sales','Hyderabad'),
+                                            -> ('Suresh',60000,'Marketing','Kolkata'),
+                                            -> ('Divya',55000,'HR','Chennai');
+Query OK, 10 rows affected (0.0128 sec)
+
+Records: 10  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from employees where department='Sales' and salary>40000;
++--------+----------+------------+-----------+
+| name   | salary   | department | city      |
++--------+----------+------------+-----------+
+| Ravi   | 45000.00 | Sales      | Hyderabad |
+| Priya  | 65000.00 | Sales      | Chennai   |
+| Anjali | 42000.00 | Sales      | Hyderabad |
++--------+----------+------------+-----------+
+3 rows in set (0.0081 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from employees where city='Hyderabad' or salary>60000;
++--------+----------+------------+-----------+
+| name   | salary   | department | city      |
++--------+----------+------------+-----------+
+| Ravi   | 45000.00 | Sales      | Hyderabad |
+| Arjun  | 70000.00 | IT         | Bangalore |
+| Priya  | 65000.00 | Sales      | Chennai   |
+| Kiran  | 50000.00 | Finance    | Hyderabad |
+| Rahul  | 80000.00 | IT         | Pune      |
+| Anjali | 42000.00 | Sales      | Hyderabad |
++--------+----------+------------+-----------+
+6 rows in set (0.0019 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from employees where not department='Finance';
++--------+----------+------------+-----------+
+| name   | salary   | department | city      |
++--------+----------+------------+-----------+
+| Ravi   | 45000.00 | Sales      | Hyderabad |
+| Sneha  | 30000.00 | HR         | Mumbai    |
+| Arjun  | 70000.00 | IT         | Bangalore |
+| Priya  | 65000.00 | Sales      | Chennai   |
+| Rahul  | 80000.00 | IT         | Pune      |
+| Anjali | 42000.00 | Sales      | Hyderabad |
+| Suresh | 60000.00 | Marketing  | Kolkata   |
+| Divya  | 55000.00 | HR         | Chennai   |
++--------+----------+------------+-----------+
+8 rows in set (0.0017 sec)
+ 
+ MySQL  localhost:33060+ ssl  operators  SQL > create table studentss(name varchar(30),city varchar(40),marks int,email varchar(80));
+Query OK, 0 rows affected (0.0600 sec)
+
+ MySQL  localhost:33060+ ssl  operators  SQL > insert into studentss(name,city,marks,email)values
+                                            -> ('Amit','Mumbai',85,'amit@gmail.com'),
+                                            -> ('Neha','Pune',78,'neha@gmail.com'),
+                                            -> ('Raj','Kolkata',90,'raj@gmail.com'),
+                                            -> ('Simran','Delhi',88,NULL),
+                                            -> ('Karthik','Chennai',70,'karthik@gmail.com'),
+                                            -> ('Pooja','Mumbai',92,NULL),
+                                            -> ('Vikram','Hyderabad',65,'vikram@gmail.com'),
+                                            -> ('Anu','Pune',80,'anu@gmail.com'),
+                                            -> ('Rohit','Kolkata',75,NULL),
+                                            -> ('Kavya','Delhi',82,'kavya@gmail.com');
+Query OK, 10 rows affected (0.0103 sec)
+
+Records: 10  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from students where city in ('Hyderabad','Pune','Kolkata');
++--------+-----------+-------+------------------+
+| name   | city      | marks | email            |
++--------+-----------+-------+------------------+
+| Neha   | Pune      |    78 | neha@gamil.com   |
+| Raj    | Kolkata   |    90 | raj@gmail.com    |
+| Vikram | Hyderabad |    65 | vikram@gmail.com |
+| Anu    | Pune      |    80 | anu@gmail.com    |
+| Rohit  | Kolkata   |    75 | NULL             |
+| Rohit  | Kolkata   |    75 | NULL             |
++--------+-----------+-------+------------------+
+6 rows in set (0.0017 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from studentss where city not in ('Delhi','Chennai');
++--------+-----------+-------+------------------+
+| name   | city      | marks | email            |
++--------+-----------+-------+------------------+
+| Amit   | Mumbai    |    85 | amit@gmail.com   |
+| Neha   | Pune      |    78 | neha@gmail.com   |
+| Raj    | Kolkata   |    90 | raj@gmail.com    |
+| Pooja  | Mumbai    |    92 | NULL             |
+| Vikram | Hyderabad |    65 | vikram@gmail.com |
+| Anu    | Pune      |    80 | anu@gmail.com    |
+| Rohit  | Kolkata   |    75 | NULL             |
++--------+-----------+-------+------------------+
+7 rows in set (0.0016 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from student where email is NULL;
+ERROR: 1146: Table 'operators.student' doesn't exist
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from studentss where email is NULL;
++--------+---------+-------+-------+
+| name   | city    | marks | email |
++--------+---------+-------+-------+
+| Simran | Delhi   |    88 | NULL  |
+| Pooja  | Mumbai  |    92 | NULL  |
+| Rohit  | Kolkata |    75 | NULL  |
++--------+---------+-------+-------+
+3 rows in set (0.0016 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from studentss where email is not NULL;
++---------+-----------+-------+-------------------+
+| name    | city      | marks | email             |
++---------+-----------+-------+-------------------+
+| Amit    | Mumbai    |    85 | amit@gmail.com    |
+| Neha    | Pune      |    78 | neha@gmail.com    |
+| Raj     | Kolkata   |    90 | raj@gmail.com     |
+| Karthik | Chennai   |    70 | karthik@gmail.com |
+| Vikram  | Hyderabad |    65 | vikram@gmail.com  |
+| Anu     | Pune      |    80 | anu@gmail.com     |
+| Kavya   | Delhi     |    82 | kavya@gmail.com   |
++---------+-----------+-------+-------------------+
+7 rows in set (0.0015 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from studentss where name like 'S%';
++--------+-------+-------+-------+
+| name   | city  | marks | email |
++--------+-------+-------+-------+
+| Simran | Delhi |    88 | NULL  |
++--------+-------+-------+-------+
+1 row in set (0.0089 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from studentss where name like '%a';
++-------+--------+-------+-----------------+
+| name  | city   | marks | email           |
++-------+--------+-------+-----------------+
+| Neha  | Pune   |    78 | neha@gmail.com  |
+| Pooja | Mumbai |    92 | NULL            |
+| Kavya | Delhi  |    82 | kavya@gmail.com |
++-------+--------+-------+-----------------+
+3 rows in set (0.0017 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from studentss where name like '----';
+Empty set (0.0015 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from studentss where name like '%----';
+Empty set (0.0015 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from studentss where name not like 'R%';
++---------+-----------+-------+-------------------+
+| name    | city      | marks | email             |
++---------+-----------+-------+-------------------+
+| Amit    | Mumbai    |    85 | amit@gmail.com    |
+| Neha    | Pune      |    78 | neha@gmail.com    |
+| Simran  | Delhi     |    88 | NULL              |
+| Karthik | Chennai   |    70 | karthik@gmail.com |
+| Pooja   | Mumbai    |    92 | NULL              |
+| Vikram  | Hyderabad |    65 | vikram@gmail.com  |
+| Anu     | Pune      |    80 | anu@gmail.com     |
+| Kavya   | Delhi     |    82 | kavya@gmail.com   |
++---------+-----------+-------+-------------------+
+8 rows in set (0.0016 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL > select * from studentss where name like '----';
+Empty set (0.0015 sec)
+ MySQL  localhost:33060+ ssl  operators  SQL >
