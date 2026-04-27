@@ -1,0 +1,125 @@
+Your MySQL connection id is 31 (X protocol)
+Server version: 8.0.45 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:33060+ ssl  SQL > create database aggregate;
+Query OK, 1 row affected (0.0287 sec)
+ MySQL  localhost:33060+ ssl  SQL > use aggregate;
+Default schema set to `aggregate`.
+Fetching global names, object names from `aggregate` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  aggregate  SQL > create table employees(emp_id int primary key,emp_name varchar(30) not null,department varchar(20) not null,salary decimal(10,2) check(salary>25000),bonus decimal(8,2) check(bonus>2000));
+Query OK, 0 rows affected (0.1006 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > desc employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| emp_id     | int           | NO   | PRI | NULL    |       |
+| emp_name   | varchar(30)   | NO   |     | NULL    |       |
+| department | varchar(20)   | NO   |     | NULL    |       |
+| salary     | decimal(10,2) | YES  |     | NULL    |       |
+| bonus      | decimal(8,2)  | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+5 rows in set (0.0162 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > INSERT INTO employees VALUES
+                                            -> (101,'Ram', 'HR',        30000, 5000),
+                                            -> (102,'Sita','IT',        45000, 7000),
+                                            -> (103,'Ravi','Finance',   40000, 6000),
+                                            -> (104,'Anu', 'IT',        50000, 8000),
+                                            -> (105,'John','HR',        35000, 5000),
+                                            -> (106,'Priya','Sales',    38000, 4000),
+                                            -> (107,'Kiran','Marketing',42000, 6000),
+                                            -> (108,'Meena','Sales',    37000, 4000);
+Query OK, 8 rows affected (0.0283 sec)
+
+Records: 8  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select * from employees;
++--------+----------+------------+----------+---------+
+| emp_id | emp_name | department | salary   | bonus   |
++--------+----------+------------+----------+---------+
+|    101 | Ram      | HR         | 30000.00 | 5000.00 |
+|    102 | Sita     | IT         | 45000.00 | 7000.00 |
+|    103 | Ravi     | Finance    | 40000.00 | 6000.00 |
+|    104 | Anu      | IT         | 50000.00 | 8000.00 |
+|    105 | John     | HR         | 35000.00 | 5000.00 |
+|    106 | Priya    | Sales      | 38000.00 | 4000.00 |
+|    107 | Kiran    | Marketing  | 42000.00 | 6000.00 |
+|    108 | Meena    | Sales      | 37000.00 | 4000.00 |
++--------+----------+------------+----------+---------+
+8 rows in set (0.0019 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select count(*) as total_employees from employees;
++-----------------+
+| total_employees |
++-----------------+
+|               8 |
++-----------------+
+1 row in set (0.0314 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select count(salary) as emp_with_sal from employees;
++--------------+
+| emp_with_sal |
++--------------+
+|            8 |
++--------------+
+1 row in set (0.0097 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select count(distinct department) as uq_department from employees;
++---------------+
+| uq_department |
++---------------+
+|             5 |
++---------------+
+1 row in set (0.0113 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select sum(salary) as total_sal_employees from employees;
++---------------------+
+| total_sal_employees |
++---------------------+
+|           317000.00 |
++---------------------+
+1 row in set (0.0024 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select avg(salary) as avg_sal from employees;
++--------------+
+| avg_sal      |
++--------------+
+| 39625.000000 |
++--------------+
+1 row in set (0.0018 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select sum(distinct bonus) as total_dist_bonus from employees;
++------------------+
+| total_dist_bonus |
++------------------+
+|         30000.00 |
++------------------+
+1 row in set (0.0020 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select max(salary) as high_sal from employees;
++----------+
+| high_sal |
++----------+
+| 50000.00 |
++----------+
+1 row in set (0.0017 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select min(salary) as low_sal from employees;
++----------+
+| low_sal  |
++----------+
+| 30000.00 |
++----------+
+1 row in set (0.0016 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select sum(salary+bonus) as total_payout from employees;
++--------------+
+| total_payout |
++--------------+
+|    362000.00 |
++--------------+
+1 row in set (0.0016 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select avg(salary-(salary*0.10)) as avg_sal_aftertax_deduct from employees;
++-------------------------+
+| avg_sal_aftertax_deduct |
++-------------------------+
+|          35662.50000000 |
++-------------------------+
+1 row in set (0.0093 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL >
+
+
+
+
+
+
+
