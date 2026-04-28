@@ -1,0 +1,163 @@
+ MySQL  localhost:33060+ ssl  aggregate  SQL > create table employees(enp_id int primary key,emp_name varchar(50),age int,department varchar(30),job_role varchar(30),salary decimal(10,2),manager varchar(50));
+Query OK, 0 rows affected (0.0626 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > INSERT INTO employees VALUES
+                                            -> (101,'Amit',28,'IT','Developer',45000,'Ramesh'),
+                                            -> (102,'Anjali',32,'HR','Recruiter',38000,'Suresh'),
+                                            -> (103,'Arjun',29,'Finance','Accountant',42000,'Meena'),
+                                            -> (104,'Bhavna',35,'IT','Tester',39000,'Ramesh'),
+                                            -> (105,'Ajay',26,'HR','HR Executive',31000,'Suresh'),
+                                            -> (106,'Deepak',41,'Finance','Analyst',55000,'Meena'),
+                                            -> (107,'Asha',30,'IT','Developer',48000,'Ramesh'),
+                                            -> (108,'Farhan',27,'Marketing','Executive',29000,NULL),
+                                            -> (109,'Geetha',33,'Finance','Manager',60000,NULL),
+                                            -> (110,'Harish',24,'IT','Support',34000,'Ramesh'),
+                                            -> (111,'Anu',31,'HR','Recruiter',36000,'Suresh'),
+                                            -> (112,'Ishaan',29,'Finance','Analyst',44000,'Meena'),
+                                            -> (113,'Jaya',38,'Marketing','Manager',52000,NULL),
+                                            -> (114,'Kiran',27,'IT','Developer',46000,'Ramesh'),
+                                            -> (115,'Lavanya',34,'HR','HR Executive',33000,'Suresh'),
+                                            -> (116,'Aravind',25,'Finance','Clerk',28000,'Meena'),
+                                            -> (117,'Madhu',36,'IT','Tester',41000,'Ramesh'),
+                                            -> (118,'Nikhil',28,'Marketing','Executive',32000,'Jaya'),
+                                            -> (119,'Akhil',23,'IT','Support',30000,'Ramesh'),
+                                            -> (120,'Priya',30,'Finance','Accountant',47000,'Meena');
+Query OK, 20 rows affected (0.0218 sec)
+
+Records: 20  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select * from employees where salary>40000;
++--------+----------+-----+------------+------------+----------+---------+
+| enp_id | emp_name | age | department | job_role   | salary   | manager |
++--------+----------+-----+------------+------------+----------+---------+
+|    101 | Amit     |  28 | IT         | Developer  | 45000.00 | Ramesh  |
+|    103 | Arjun    |  29 | Finance    | Accountant | 42000.00 | Meena   |
+|    106 | Deepak   |  41 | Finance    | Analyst    | 55000.00 | Meena   |
+|    107 | Asha     |  30 | IT         | Developer  | 48000.00 | Ramesh  |
+|    109 | Geetha   |  33 | Finance    | Manager    | 60000.00 | NULL    |
+|    112 | Ishaan   |  29 | Finance    | Analyst    | 44000.00 | Meena   |
+|    113 | Jaya     |  38 | Marketing  | Manager    | 52000.00 | NULL    |
+|    114 | Kiran    |  27 | IT         | Developer  | 46000.00 | Ramesh  |
+|    117 | Madhu    |  36 | IT         | Tester     | 41000.00 | Ramesh  |
+|    120 | Priya    |  30 | Finance    | Accountant | 47000.00 | Meena   |
++--------+----------+-----+------------+------------+----------+---------+
+10 rows in set (0.0031 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select * from employees where emp_name like 'A%';
++--------+----------+-----+------------+--------------+----------+---------+
+| enp_id | emp_name | age | department | job_role     | salary   | manager |
++--------+----------+-----+------------+--------------+----------+---------+
+|    101 | Amit     |  28 | IT         | Developer    | 45000.00 | Ramesh  |
+|    102 | Anjali   |  32 | HR         | Recruiter    | 38000.00 | Suresh  |
+|    103 | Arjun    |  29 | Finance    | Accountant   | 42000.00 | Meena   |
+|    105 | Ajay     |  26 | HR         | HR Executive | 31000.00 | Suresh  |
+|    107 | Asha     |  30 | IT         | Developer    | 48000.00 | Ramesh  |
+|    111 | Anu      |  31 | HR         | Recruiter    | 36000.00 | Suresh  |
+|    116 | Aravind  |  25 | Finance    | Clerk        | 28000.00 | Meena   |
+|    119 | Akhil    |  23 | IT         | Support      | 30000.00 | Ramesh  |
++--------+----------+-----+------------+--------------+----------+---------+
+8 rows in set (0.0099 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select * from employees where department in('HR','Finance');
++--------+----------+-----+------------+--------------+----------+---------+
+| enp_id | emp_name | age | department | job_role     | salary   | manager |
++--------+----------+-----+------------+--------------+----------+---------+
+|    102 | Anjali   |  32 | HR         | Recruiter    | 38000.00 | Suresh  |
+|    103 | Arjun    |  29 | Finance    | Accountant   | 42000.00 | Meena   |
+|    105 | Ajay     |  26 | HR         | HR Executive | 31000.00 | Suresh  |
+|    106 | Deepak   |  41 | Finance    | Analyst      | 55000.00 | Meena   |
+|    109 | Geetha   |  33 | Finance    | Manager      | 60000.00 | NULL    |
+|    111 | Anu      |  31 | HR         | Recruiter    | 36000.00 | Suresh  |
+|    112 | Ishaan   |  29 | Finance    | Analyst      | 44000.00 | Meena   |
+|    115 | Lavanya  |  34 | HR         | HR Executive | 33000.00 | Suresh  |
+|    116 | Aravind  |  25 | Finance    | Clerk        | 28000.00 | Meena   |
+|    120 | Priya    |  30 | Finance    | Accountant   | 47000.00 | Meena   |
++--------+----------+-----+------------+--------------+----------+---------+
+10 rows in set (0.0084 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select * from employees where manager is null;
++--------+----------+-----+------------+-----------+----------+---------+
+| enp_id | emp_name | age | department | job_role  | salary   | manager |
++--------+----------+-----+------------+-----------+----------+---------+
+|    108 | Farhan   |  27 | Marketing  | Executive | 29000.00 | NULL    |
+|    109 | Geetha   |  33 | Finance    | Manager   | 60000.00 | NULL    |
+|    113 | Jaya     |  38 | Marketing  | Manager   | 52000.00 | NULL    |
++--------+----------+-----+------------+-----------+----------+---------+
+3 rows in set (0.0018 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select department,count(*) as total_employees from employees where salary>30000 group by department;
++------------+-----------------+
+| department | total_employees |
++------------+-----------------+
+| IT         |               6 |
+| HR         |               4 |
+| Finance    |               5 |
+| Marketing  |               2 |
++------------+-----------------+
+4 rows in set (0.0102 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select job_role,avg(salary) as avg_sal from employees where department='IT' group by job_role;
++-----------+--------------+
+| job_role  | avg_sal      |
++-----------+--------------+
+| Developer | 46333.333333 |
+| Tester    | 40000.000000 |
+| Support   | 32000.000000 |
++-----------+--------------+
+3 rows in set (0.0093 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select department,job_role,sum(salary) as total_sal from employees where age<35 group by department,job_role;
++------------+--------------+-----------+
+| department | job_role     | total_sal |
++------------+--------------+-----------+
+| IT         | Developer    | 139000.00 |
+| HR         | Recruiter    |  74000.00 |
+| Finance    | Accountant   |  89000.00 |
+| HR         | HR Executive |  64000.00 |
+| Marketing  | Executive    |  61000.00 |
+| Finance    | Manager      |  60000.00 |
+| IT         | Support      |  64000.00 |
+| Finance    | Analyst      |  44000.00 |
+| Finance    | Clerk        |  28000.00 |
++------------+--------------+-----------+
+9 rows in set (0.0023 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select department,sum(salary) as total_sal from employees group by department;
++------------+-----------+
+| department | total_sal |
++------------+-----------+
+| IT         | 283000.00 |
+| HR         | 138000.00 |
+| Finance    | 276000.00 |
+| Marketing  | 113000.00 |
++------------+-----------+
+4 rows in set (0.0018 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select department,count(*) as total_emp_count from employees group by department;
++------------+-----------------+
+| department | total_emp_count |
++------------+-----------------+
+| IT         |               7 |
+| HR         |               4 |
+| Finance    |               6 |
+| Marketing  |               3 |
++------------+-----------------+
+4 rows in set (0.0018 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select department,avg(salary) as avg_sal from employees group by department;
++------------+--------------+
+| department | avg_sal      |
++------------+--------------+
+| IT         | 40428.571429 |
+| HR         | 34500.000000 |
+| Finance    | 46000.000000 |
+| Marketing  | 37666.666667 |
++------------+--------------+
+4 rows in set (0.0018 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > select department,job_role,count(*) as total_employees from employees group by department,job_role;
++------------+--------------+-----------------+
+| department | job_role     | total_employees |
++------------+--------------+-----------------+
+| IT         | Developer    |               3 |
+| HR         | Recruiter    |               2 |
+| Finance    | Accountant   |               2 |
+| IT         | Tester       |               2 |
+| HR         | HR Executive |               2 |
+| Finance    | Analyst      |               2 |
+| Marketing  | Executive    |               2 |
+| Finance    | Manager      |               1 |
+| IT         | Support      |               2 |
+| Marketing  | Manager      |               1 |
+| Finance    | Clerk        |               1 |
++------------+--------------+-----------------+
+11 rows in set (0.0019 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL >
