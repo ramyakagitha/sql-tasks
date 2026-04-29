@@ -1,0 +1,357 @@
+ MySQL  localhost:33060+ ssl  aggregate  SQL > create database clauses;
+Query OK, 1 row affected (0.0675 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > use clauses;
+Default schema set to `clauses`.
+Fetching global names, object names from `clauses` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  clauses  SQL > create table orders(order_id int primary key,customer_id int,amount decimal(10,2));
+Query OK, 0 rows affected (0.1431 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > INSERT INTO orders VALUES
+                                          -> (1,101,500),(2,102,700),(3,101,300),(4,103,900),(5,101,200),
+                                          -> (6,102,400),(7,104,800),(8,101,600),(9,103,500),(10,105,1000),
+                                          -> (11,101,250),(12,102,350),(13,103,450),(14,104,650),(15,105,750),
+                                          -> (16,101,850),(17,102,150),(18,103,550),(19,104,950),(20,105,650);
+Query OK, 20 rows affected (0.0282 sec)
+
+Records: 20  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL >
+ MySQL  localhost:33060+ ssl  clauses  SQL > CREATE TABLE products (
+                                          ->     product_name VARCHAR(50),
+                                          ->     category VARCHAR(50),
+                                          ->     price INT
+                                          -> );
+Query OK, 0 rows affected (0.0608 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > INSERT INTO products VALUES
+                                          -> ('Laptop','Electronics',60000),('Phone','Electronics',30000),
+                                          -> ('TV','Electronics',50000),('Tablet','Electronics',25000),
+                                          -> ('Shirt','Clothing',2000),('Jeans','Clothing',3000),
+                                          -> ('Jacket','Clothing',5000),('Shoes','Clothing',4000),
+                                          -> ('Rice','Groceries',1000),('Wheat','Groceries',1200),
+                                          -> ('Oil','Groceries',2000),('Sugar','Groceries',1500),
+                                          -> ('Watch','Accessories',7000),('Bag','Accessories',5000),
+                                          -> ('Belt','Accessories',2000),('Cap','Accessories',1500),
+                                          -> ('Camera','Electronics',45000),('Headphones','Electronics',8000),
+                                          -> ('Keyboard','Electronics',3000),('Mouse','Electronics',2000);
+Query OK, 20 rows affected (0.0154 sec)
+
+Records: 20  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > CREATE TABLE sales (
+                                          ->     salesperson_id INT,
+                                          ->     product_id INT,
+                                          ->     quantity INT,
+                                          ->     sale_date DATE
+                                          -> );
+Query OK, 0 rows affected (0.0628 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > INSERT INTO sales VALUES
+                                          -> (1,101,20,'2024-01-01'),(1,102,30,'2024-01-02'),
+                                          -> (1,103,40,'2024-01-03'),(1,104,20,'2024-01-04'),
+                                          -> (2,101,10,'2024-01-01'),(2,102,20,'2024-01-02'),
+                                          -> (2,103,30,'2024-01-03'),(3,101,50,'2024-01-01'),
+                                          -> (3,102,30,'2024-01-02'),(3,103,40,'2024-01-03'),
+                                          -> (3,104,20,'2024-01-04'),(4,101,10,'2024-01-01'),
+                                          -> (4,102,20,'2024-01-02'),(5,103,60,'2024-01-03'),
+                                          -> (5,104,50,'2024-01-04'),(5,105,40,'2024-01-05'),
+                                          -> (6,101,10,'2024-01-01'),(6,102,20,'2024-01-02'),
+                                          -> (6,103,30,'2024-01-03'),(6,104,50,'2024-01-04');
+Query OK, 20 rows affected (0.0198 sec)
+
+Records: 20  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > CREATE TABLE employees (
+                                          ->     name VARCHAR(50),
+                                          ->     department VARCHAR(50),
+                                          ->     salary decimal(10,2));
+Query OK, 0 rows affected (0.0529 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > INSERT INTO employees VALUES
+                                          -> ('A', 'Engineering',80000),('B','Engineering',90000),
+                                          -> ('C','HR',50000),('D','Engineering',120000),
+                                          -> ('E','HR',60000),('F','Engineering',110000),
+                                          -> ('G','Sales',70000),('H','Sales',65000),
+                                          -> ('I','Engineering',95000),('J','HR',55000),
+                                          -> ('K','Engineering',105000),('L','Sales',75000),
+                                          -> ('M','Engineering',115000),('N','HR',58000),
+                                          -> ('O','Engineering',125000),('P','Sales',72000),
+                                          -> ('Q','Engineering',98000),('R','HR',53000),
+                                          -> ('S','Engineering',102000),('T','Sales',69000);
+Query OK, 20 rows affected (0.0134 sec)
+
+Records: 20  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > CREATE TABLE students (
+                                          ->     name VARCHAR(50),
+                                          ->     grade INT,
+                                          ->     score INT
+                                          -> );
+Query OK, 0 rows affected (0.0490 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > INSERT INTO students VALUES
+                                          -> ('A',1,90),('B',1,85),('C',1,NULL),('D',2,88),
+                                          -> ('E',2,92),('F',2,NULL),('G',3,70),('H',3,75),
+                                          -> ('I',3,80),('J',1,95),('K',2,60),('L',3,NULL),
+                                          -> ('M',1,78),('N',2,82),('O',3,68),('P',1,88),
+                                          -> ('Q',2,91),('R',3,77),('S',1,NULL),('T',2,89);
+Query OK, 20 rows affected (0.0182 sec)
+
+Records: 20  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > CREATE TABLE customers (
+                                          ->     customer_id INT,
+                                          ->     name VARCHAR(50)
+                                          -> );
+Query OK, 0 rows affected (0.0625 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL >
+ MySQL  localhost:33060+ ssl  clauses  SQL > INSERT INTO customers VALUES
+                                          -> (1,'A'),(2,'B'),(3,'C'),(4,'D'),(5,'E'),
+                                          -> (6,'F'),(7,'G'),(8,'H'),(9,'I'),(10,'J'),
+                                          -> (11,'K'),(12,'L'),(13,'M'),(14,'N'),(15,'O'),
+                                          -> (16,'P'),(17,'Q'),(18,'R'),(19,'S'),(20,'T');
+Query OK, 20 rows affected (0.0216 sec)
+
+Records: 20  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > select customer_id from orders group by customer_id having count(*)>3;                                     
++-------------+
+| customer_id |
++-------------+
+|         101 |
+|         102 |
+|         103 |
++-------------+
+3 rows in set (0.0050 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > select category,sum(price) as total_price from products group by category having total_price>50000;
++-------------+-------------+
+| category    | total_price |
++-------------+-------------+
+| Electronics |      223000 |
++-------------+-------------+
+1 row in set (0.0107 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > select category from products group by category having sum(price)>50000;
++-------------+
+| category    |
++-------------+
+| Electronics |
++-------------+
+1 row in set (0.0021 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > select salesperson_id from sales group by salesperson_id having count(distinct product_id)>=3 and sum(quantity)>100;
++----------------+
+| salesperson_id |
++----------------+
+|              1 |
+|              3 |
+|              5 |
+|              6 |
++----------------+
+4 rows in set (0.0109 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > select * from employees order by salary desc;
++------+-------------+-----------+
+| name | department  | salary    |
++------+-------------+-----------+
+| O    | Engineering | 125000.00 |
+| D    | Engineering | 120000.00 |
+| M    | Engineering | 115000.00 |
+| F    | Engineering | 110000.00 |
+| K    | Engineering | 105000.00 |
+| S    | Engineering | 102000.00 |
+| Q    | Engineering |  98000.00 |
+| I    | Engineering |  95000.00 |
+| B    | Engineering |  90000.00 |
+| A    | Engineering |  80000.00 |
+| L    | Sales       |  75000.00 |
+| P    | Sales       |  72000.00 |
+| G    | Sales       |  70000.00 |
+| T    | Sales       |  69000.00 |
+| H    | Sales       |  65000.00 |
+| E    | HR          |  60000.00 |
+| N    | HR          |  58000.00 |
+| J    | HR          |  55000.00 |
+| R    | HR          |  53000.00 |
+| C    | HR          |  50000.00 |
++------+-------------+-----------+
+20 rows in set (0.0101 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > select product_name,price*0.85 as discounted_price from products order by discounted_price;
++--------------+------------------+
+| product_name | discounted_price |
++--------------+------------------+
+| Rice         |           850.00 |
+| Wheat        |          1020.00 |
+| Sugar        |          1275.00 |
+| Cap          |          1275.00 |
+| Shirt        |          1700.00 |
+| Oil          |          1700.00 |
+| Belt         |          1700.00 |
+| Mouse        |          1700.00 |
+| Jeans        |          2550.00 |
+| Keyboard     |          2550.00 |
+| Shoes        |          3400.00 |
+| Jacket       |          4250.00 |
+| Bag          |          4250.00 |
+| Watch        |          5950.00 |
+| Headphones   |          6800.00 |
+| Tablet       |         21250.00 |
+| Phone        |         25500.00 |
+| Camera       |         38250.00 |
+| TV           |         42500.00 |
+| Laptop       |         51000.00 |
++--------------+------------------+
+20 rows in set (0.0027 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > select * from students order by grade,score desc;
++------+-------+-------+
+| name | grade | score |
++------+-------+-------+
+| J    |     1 |    95 |
+| A    |     1 |    90 |
+| P    |     1 |    88 |
+| B    |     1 |    85 |
+| M    |     1 |    78 |
+| C    |     1 |  NULL |
+| S    |     1 |  NULL |
+| E    |     2 |    92 |
+| Q    |     2 |    91 |
+| T    |     2 |    89 |
+| D    |     2 |    88 |
+| N    |     2 |    82 |
+| K    |     2 |    60 |
+| F    |     2 |  NULL |
+| I    |     3 |    80 |
+| R    |     3 |    77 |
+| H    |     3 |    75 |
+| G    |     3 |    70 |
+| O    |     3 |    68 |
+| L    |     3 |  NULL |
++------+-------+-------+
+20 rows in set (0.0112 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > select * from customers limit 5;
++-------------+------+
+| customer_id | name |
++-------------+------+
+|           1 | A    |
+|           2 | B    |
+|           3 | C    |
+|           4 | D    |
+|           5 | E    |
++-------------+------+
+5 rows in set (0.0092 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > select * from products order by price  desc limit 3;
++--------------+-------------+-------+
+| product_name | category    | price |
++--------------+-------------+-------+
+| Laptop       | Electronics | 60000 |
+| TV           | Electronics | 50000 |
+| Camera       | Electronics | 45000 |
++--------------+-------------+-------+
+3 rows in set (0.0021 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > select * from employees where department='Engineering' order by salary desc limit 3;
++------+-------------+-----------+
+| name | department  | salary    |
++------+-------------+-----------+
+| O    | Engineering | 125000.00 |
+| D    | Engineering | 120000.00 |
+| M    | Engineering | 115000.00 |
++------+-------------+-----------+
+3 rows in set (0.0122 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > select * from students limit 5 offset 5;
++------+-------+-------+
+| name | grade | score |
++------+-------+-------+
+| F    |     2 |  NULL |
+| G    |     3 |    70 |
+| H    |     3 |    75 |
+| I    |     3 |    80 |
+| J    |     1 |    95 |
++------+-------+-------+
+5 rows in set (0.0025 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > select * from products limit 8 offset 24;
+Empty set (0.0018 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > select * from orders order by order_date desc limit 10 offset 20;
+ERROR: 1054: Unknown column 'order_date' in 'order clause'
+ MySQL  localhost:33060+ ssl  clauses  SQL > alter table orders add order_date DATE;
+Query OK, 0 rows affected (0.0951 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-01' WHERE order_id = 1;
+Query OK, 1 row affected (0.0138 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-02' WHERE order_id = 2;
+Query OK, 1 row affected (0.0057 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-03' WHERE order_id = 3;
+Query OK, 1 row affected (0.0073 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-04' WHERE order_id = 4;
+Query OK, 1 row affected (0.0059 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-05' WHERE order_id = 5;
+Query OK, 1 row affected (0.0060 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-06' WHERE order_id = 6;
+Query OK, 1 row affected (0.0050 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-07' WHERE order_id = 7;
+Query OK, 1 row affected (0.0052 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-08' WHERE order_id = 8;
+Query OK, 1 row affected (0.0074 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-09' WHERE order_id = 9;
+Query OK, 1 row affected (0.0082 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-10' WHERE order_id = 10;
+Query OK, 1 row affected (0.0049 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-11' WHERE order_id = 11;
+Query OK, 1 row affected (0.0137 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-12' WHERE order_id = 12;
+Query OK, 1 row affected (0.0075 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-13' WHERE order_id = 13;
+Query OK, 1 row affected (0.0061 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-14' WHERE order_id = 14;
+Query OK, 1 row affected (0.0077 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-15' WHERE order_id = 15;
+Query OK, 1 row affected (0.0071 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-16' WHERE order_id = 16;
+Query OK, 1 row affected (0.0058 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-17' WHERE order_id = 17;
+Query OK, 1 row affected (0.0058 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-18' WHERE order_id = 18;
+Query OK, 1 row affected (0.0061 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-19' WHERE order_id = 19;
+Query OK, 1 row affected (0.0062 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > UPDATE orders SET order_date = '2024-01-20' WHERE order_id = 20;
+Query OK, 1 row affected (0.0137 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  clauses  SQL > desc orders;
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| order_id    | int           | NO   | PRI | NULL    |       |
+| customer_id | int           | YES  |     | NULL    |       |
+| amount      | decimal(10,2) | YES  |     | NULL    |       |
+| order_date  | date          | YES  |     | NULL    |       |
++-------------+---------------+------+-----+---------+-------+
+4 rows in set (0.0211 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL > select * from orders order by order_date desc limit 10 offset 20;
+Empty set (0.0019 sec)
+ MySQL  localhost:33060+ ssl  clauses  SQL >
