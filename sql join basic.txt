@@ -1,0 +1,215 @@
+create database mi;
+use mi;
+-- Company Table
+CREATE TABLE Company (
+    company_id INT PRIMARY KEY,
+    company_name VARCHAR(50),
+    location VARCHAR(50)
+);
+
+-- Department Table
+CREATE TABLE Department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50),
+    location VARCHAR(50),
+    company_id INT,
+    FOREIGN KEY (company_id) REFERENCES Company(company_id)
+);
+
+-- Employees Table
+CREATE TABLE Employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    salary INT,
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES Department(dept_id)
+);
+
+-- Insert into Company
+INSERT INTO Company VALUES (1, 'TCS', 'Hyderabad');
+INSERT INTO Company VALUES (2, 'Infosys', 'Bangalore');
+INSERT INTO Company VALUES (3, 'Wipro', 'Chennai');
+
+-- Insert into Department
+INSERT INTO Department VALUES (101, 'HR', 'Hyderabad', 1);
+INSERT INTO Department VALUES (102, 'IT', 'Bangalore', 2);
+INSERT INTO Department VALUES (103, 'Finance', 'Chennai', 3);
+INSERT INTO Department VALUES (104, 'Admin', 'Hyderabad', 1);
+
+-- Insert into Employees
+INSERT INTO Employees VALUES (1, 'Ram', 60000, 101);
+INSERT INTO Employees VALUES (2, 'Sita', 45000, 102);
+INSERT INTO Employees VALUES (3, 'Ravi', 70000, 103);
+INSERT INTO Employees VALUES (4, 'Anu', 30000, 104);
+INSERT INTO Employees VALUES (5, 'Kiran', 80000, 101);
+
+select emp_name,dept_name from employees inner join department
+on employees.dept_id=department.dept_id;
+
+select e.emp_name,e.salary,c.company_name from employees e 
+inner join department d on d.dept_id=e.dept_id
+inner join company c on c.company_id=d.company_id;
+
+select e.emp_name,d.dept_name from employees e inner join
+department d on e.dept_id=d.dept_id;
+
+select e.emp_name,d.location from employees e inner join department d
+on e.dept_id=d.dept_id;
+
+select e.emp_name,d.dept_name from employees e inner join 
+department d on e.dept_id=d.dept_id where d.dept_name='HR';
+
+select e.emp_name,c.company_name from employees e
+inner join department d on e.dept_id=d.dept_id
+inner join company c on c.company_id=d.company_id;
+
+select e.emp_name from employees e
+inner join department d on e.dept_id=d.dept_id
+inner join company c on c.company_id=d.company_id;
+
+select e.emp_name,d.dept_name,c.company_name from employees e
+inner join department d on e.dept_id=d.dept_id
+inner join company c on c.company_id=d.company_id;
+
+select e.emp_name,d.dept_name from employees e inner join 
+department d on e.dept_id=d.dept_id where e.salary>50000;
+
+select e.emp_name,c.company_name from employees e
+inner join department d on e.dept_id=d.dept_id
+inner join company c on c.company_id=d.company_id
+where c.company_name='TCS';
+
+use mi;
+-- Movie Table
+CREATE TABLE Movie (
+    movie_id INT PRIMARY KEY,
+    movie_name VARCHAR(50)
+);
+
+-- Theatre Table
+CREATE TABLE Theatre (
+    theatre_id INT PRIMARY KEY,
+    theatre_name VARCHAR(50),
+    location VARCHAR(50)
+);
+
+-- Booking Table
+CREATE TABLE Booking (
+    booking_id INT PRIMARY KEY,
+    movie_id INT,
+    theatre_id INT,
+    customer_name VARCHAR(50),
+    show_time VARCHAR(20),
+    FOREIGN KEY (movie_id) REFERENCES Movie(movie_id),
+    FOREIGN KEY (theatre_id) REFERENCES Theatre(theatre_id)
+);
+
+-- Insert into Movie
+INSERT INTO Movie VALUES (1, 'Devara');
+INSERT INTO Movie VALUES (2, 'KGF');
+INSERT INTO Movie VALUES (3, 'Peddi');
+
+-- Insert into Theatre
+INSERT INTO Theatre VALUES (1, 'PVR', 'Hyderabad');
+INSERT INTO Theatre VALUES (2, 'PVP', 'Vijayawada');
+INSERT INTO Theatre VALUES (3, 'AVG', 'Bhimavaram');
+
+-- Insert into Booking
+INSERT INTO Booking VALUES (1, 1, 1, 'Ramesh', '10AM');
+INSERT INTO Booking VALUES (2, 2, 2, 'Suresh', '1PM');
+INSERT INTO Booking VALUES (3, 3, 3, 'Mahesh', '6PM');
+INSERT INTO Booking VALUES (4, 1, 2, 'Anil', '9PM');
+
+select b.booking_id,b.customer_name,m.movie_name from booking b
+inner join movie m on b.movie_id=m.movie_id;
+
+select m.movie_name,t.theatre_name from booking b
+inner join movie m on m.movie_id=b.movie_id
+inner join theatre t on b.theatre_id=t.theatre_id;
+
+select b.customer_name,m.movie_name from booking b
+inner join movie m on b.movie_id=m.movie_id;
+
+select distinct m.movie_name from booking b
+inner join movie m on b.movie_id=m.movie_id;
+
+select b.*,t.location from booking b
+inner join theatre t on b.theatre_id=t.theatre_id;
+
+select m.movie_name,b.show_time,t.theatre_name from booking b
+inner join movie m on b.movie_id=m.movie_id
+inner join theatre t on b.theatre_id=t.theatre_id;
+
+select b.* from booking b inner join movie m
+on b.movie_id=m.movie_id where movie_name='Devara';
+
+select distinct t.theatre.name from theatre t 
+inner join booking b on t.theatre_id=b.theatre_id;
+
+select m.movie_name,count(b.booking_id) as total_bookings
+from booking b inner join movie m on b.movie_id=m.movie_id
+group by m.movie_name;
+
+select b.* from booking b inner join movie m on b.movie_id=m.movie_id
+inner join theatre t on b.theatre_id=t.theatre_id;
+
+use mi;
+
+-- Students Table
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(50),
+    branch VARCHAR(50)
+);
+
+-- Placement Table
+CREATE TABLE Placement (
+    placement_id INT PRIMARY KEY,
+    student_id INT,
+    company_name VARCHAR(50),
+    package DECIMAL(5,2),
+    location VARCHAR(50),
+    FOREIGN KEY (student_id) REFERENCES Students(student_id)
+);
+
+-- Insert into Students
+INSERT INTO Students VALUES (1, 'Ramya', 'CSE');
+INSERT INTO Students VALUES (2, 'Mounika', 'ECE');
+INSERT INTO Students VALUES (3, 'Raju', 'IT');
+INSERT INTO Students VALUES (4, 'Kavya', 'CSE');
+
+-- Insert into Placement
+INSERT INTO Placement VALUES (1, 1, 'TCS', 5.0, 'Hyderabad');
+INSERT INTO Placement VALUES (2, 2, 'Infosys', 6.0, 'Bangalore');
+INSERT INTO Placement VALUES (3, 3, 'Wipro', 4.0, 'Chennai');
+
+select s.student_name from students s inner join placement p
+on s.student_id=p.student_id;
+
+select s.student_name,p.company_name from students s inner join
+placement p on s.student_id=p.student_id;
+
+select s.student_name,p.package from students s inner join 
+placement p on s.student_id=p.student_id;
+
+select s.student_name from students s inner join placement p
+on s.student_id=p.student_id where
+p.company_name='Infosys';
+
+select s.student_name,p.* from students s inner join placement p
+on s.student_id=p.student_id;
+
+select s.student_name,s.branch,p.company_name from students s
+inner join placement p on s.student_id=p.student_id;
+
+select s.student_name from students s inner join placement p 
+on s.student_id=p.student_id;
+
+select s.student_name,p.package from students s inner join placement p 
+on s.student_id=p.student_id where p.package>5;
+
+select s.*,p.location from students s inner join placement p 
+on s.student_id=p.student_id;
+
+select s.student_name from students s inner join placement p 
+on s.student_id=p.student_id;
