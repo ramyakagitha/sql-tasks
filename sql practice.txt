@@ -1,0 +1,247 @@
+              SQL PRACTICE SESSION ASSIGNNMENT
+
+1)Define Data and explain the different types of data
+Data is a collection of facts,values,numbers,or information that can be stored and processed.
+Types of Data:
+i.Numeric data-numbers
+ii. Chacracter/string data- text values
+iii.Boolean data - True or False values
+iv. Date and Time data - stores date/time
+v. Binary data - images,filees,videos
+Types of data include structured, unstructured, semi-structured, qualitative, and quantitative data.
+
+
+2)What is a Database?
+A database is an organized collection of related data stored that can be easy to access,manage and update
+Ex: Student management system database
+
+
+3)What is DBMS? Explain its purpose
+DBMS(Database management System):Software used to ccreate, manage, and control databases.
+Purpose:
+store data securely
+Retrieve data quickly
+reduce data redundancy
+provide data security
+allow multiple users to ccess data
+Example: MySQL, Oracle
+
+
+4)Explain the types of DBMS
+Types of DBMS
+1.Hierarchial DBMS
+Data stored in tree structure.
+2.Network DBMS
+Data connected using many to many relationships.
+3.Relational DBMS(RDBMS)
+Data stored in tables.
+4.Object-Oriented DBMS
+Stores data as objects.
+
+5)What is MySQL?
+MySQL is an open-source relational database manageement system used to store and manage data using SQL.
+
+
+6)What is SQL?
+SQL(Structured Query Language) is a language useed to comminicate with databases.
+Used for:
+Creating tables
+Inserting data
+Updating data
+Deleting data
+Retrieving data
+
+
+7)Why is MySQL mostly used compared to other DBMS?
+Open-sourcce and free
+Easy to learn
+Fast performance
+Secure
+Supports large databases
+Compatible with many programming languages
+
+
+8)What is a query in SQL?
+A query is a SQL statement used to perform operations on data.
+Example: SELECT * FROM employees;
+
+
+9)What is a table in a database?
+A table is a collection of rows and columns used to store related data.
+
+
+10)What is a record in a table?
+A record is a single row in a table.
+Example:
+| id | name |
+| -- | ---- |
+| 1  | Ram  |
+This row is one record.
+
+
+11)what is a column in a table?
+A column is a vertical field in a table that stores a specific type of data.
+Example: id,name,salary
+
+
+
+12)Explain the different types of SQL command languages?
+1.DDL (Data Definition Language):Used to define database structure.
+Commands:
+CREATE
+ALTER
+DROP
+TRUNCATE
+RENAME
+2.DML (Data Manipulation Language)
+Used to manipulate data.
+Commands:
+INSERT
+UPDATE
+DELETE
+3. DQL (Data Query Language)
+Used to retrieve data.
+Command:
+SELECT
+4. DCL (Data Control Language)
+Used for permissions.
+Commands:
+GRANT
+REVOKE
+5. TCL (Transaction Control Language)
+Used for transaction management.
+Commands:
+COMMIT
+ROLLBACK
+SAVEPOINT
+
+13)create a table
+CREATE TABLE employees (
+    id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
+    sno INT AUTO_INCREMENT UNIQUE,
+    salary DECIMAL(10,2),
+    address VARCHAR(200),
+    status BOOLEAN,
+    department VARCHAR(50)
+);
+
+
+14)Insert 8 records
+INSERT INTO employees (salary, address, status, department)
+VALUES
+(25000, 'Hyderabad', TRUE, 'IT'),
+(18000, 'Chennai', FALSE, 'HR'),
+(32000, 'Bangalore', TRUE, 'Finance'),
+(22000, 'Mumbai', TRUE, 'IT'),
+(15000, 'Delhi', FALSE, 'HR'),
+(28000, 'Pune', TRUE, 'Marketing'),
+(35000, 'Kolkata', TRUE, 'Finance'),
+(20000, 'Vizag', FALSE, 'IT');
+
+
+15)Write a query to salary by adding a bonus of 1000 where salary is grater than 20000?
+UPDATE employees
+SET salary = salary + 1000
+WHERE salary > 20000;
+
+
+
+16)Rename the existing table
+RENAME TABLE employees TO employee_details;
+
+
+17)Add a new column 'email' using ALTER
+ALTER TABLE employee_details
+ADD email VARCHAR(100);
+
+
+18)Update email values using CASE statement in a single query
+UPDATE employee_details
+SET email =
+CASE
+    WHEN department = 'IT' THEN 'it@gmail.com'
+    WHEN department = 'HR' THEN 'hr@gmail.com'
+    WHEN department = 'Finance' THEN 'finance@gmail.com'
+    ELSE 'admin@gmail.com'
+END;
+
+
+
+19)Modify the status column datatype from boolean to varchar
+ALTER TABLE employee_details
+MODIFY status VARCHAR(20);
+
+
+
+THEORY COMPARISION QUESTIONS
+
+20)Difference betweeen ALTER and UPDATE
+| ALTER                   | UPDATE               |
+| ----------------------- | -------------------- |
+| Changes table structure | Changes data in rows |
+| Used on columns/tables  | Used on records      |
+| DDL command             | DML command          |
+
+
+
+21) Difference between DROP and TRUNCATE
+| DROP                    | TRUNCATE          |
+| ----------------------- | ----------------- |
+| Deletes entire table    | Deletes only data |
+| Table structure removed | Structure remains |
+| Cannot rollback         | Faster operation  |
+
+
+22)Delete rows where salary is less than average salary of department
+delete from  employee_details where salary<(select avd(salary) from employee_details)
+
+
+23)Difference between GROUP BY and HAVING
+| GROUP BY                      | HAVING               |
+| ----------------------------- | -------------------- |
+| Groups rows                   | Filters grouped data |
+| Used with aggregate functions | Used after GROUP BY  |
+
+
+
+24)Count employees in each department
+SELECT department, COUNT(*) AS total_employees
+FROM employee_details
+GROUP BY department;
+
+
+25)Count employees in IT department
+SELECT COUNT(*) AS total_it_employees
+FROM employee_details
+WHERE department = 'IT';
+
+
+26)ENUM datatype syntax
+CREATE TABLE students (
+    gender ENUM('Male', 'Female', 'Other')
+);
+
+
+27)SET datatype syntax
+CREATE TABLE hobbies (
+    skills SET('Java', 'Python', 'SQL')
+);
+
+
+
+28)Query to retrieve second highest salary
+select name,salary from employee_details where salary=(select max(salary) from employee_details)<(select max(salary) from employee_details);
+
+
+29)FOREIGN KEY syntax
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    FOREIGN KEY (customer_id)
+    REFERENCES customers(customer_id)
+);
+
+
+
+30)How can I find the data type of all columns in a table in MySQL?
+DESCRIBE employee_details;
